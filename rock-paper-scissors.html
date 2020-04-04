@@ -2,14 +2,62 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>R.P.S. boooooiiiii</title>
+    <title>Good Ol' Rock, Paper, Scissorz</title>
   </head>
   <body>
     <script type="text/javascript">
+      let playerScore   = 0;
+      let computerScore = 0;
+      let rounds = 0;
+
       function computerPlay() {
-        let rpsArray = ["rock", "paper", "scissors"];
-        return rpsArray[Math.floor(Math.random() * (2 - 0 + 1)) + 0];
+        const rpsArray = ["rock", "paper", "scissors"];
+        return rpsArray[Math.floor(Math.random() * 3)];
       }
+
+      function playRound(playerChoice, computerChoice) {
+        playerChoice = playerChoice.toLowerCase();
+        computerChoice = computerChoice.toLowerCase();
+        if (playerChoice == computerChoice) {
+          return console.log(`Tie. Both chose ${playerChoice}.`);
+        } else if (playerChoice === 'rock' && computerChoice === 'scissors') {
+          playerScore++;
+          return console.log(`You win this round. ${playerChoice} beats ${computerChoice}.`);
+        } else if (playerChoice === 'rock' && computerChoice === 'paper') {
+          computerScore++;
+          return console.log(`You lose this round. ${computerChoice} beats your ${playerChoice}`);
+        } else if (playerChoice === 'paper' && computerChoice === 'rock') {
+          playerScore++;
+          return console.log(`You win this round. ${playerChoice} beats ${computerChoice}.`);
+        } else if (playerChoice === 'paper' && computerChoice === 'scissors') {
+          computerScore++;
+          return console.log(`You lose this round. ${computerChoice} beats your ${playerChoice}`);
+        } else if (playerChoice === 'scissors' && computerChoice === 'paper') {
+          playerScore++;
+          return console.log(`You win this round. ${playerChoice} beats ${computerChoice}.`);
+        } else if (playerChoice === 'scissors' && computerChoice === 'rock') {
+          computerScore++;
+          return console.log(`You lose this round ${computerChoice} beats your ${playerChoice}`);
+        } else {
+          console.log("You entered an invalid choice. Get it together.");
+        }
+      }
+
+      function game(rounds = 5) {
+        if (typeof(rounds) !== 'number' || rounds === 0) {
+          return "Must give game() a number(non-zero) argument";
+        } else {console.log(`Starting new game of ${rounds} rounds...`);}
+        while (rounds > 0) {
+          let playerChoice = prompt('Rock, paper, or scissors? ', '');
+          playRound(playerChoice, computerPlay());
+          rounds--;
+          console.log(`Score: Player (${playerScore}|${computerScore}) Computer`);
+          console.log(`${rounds} rounds left.`);
+        }
+        playerScore === computerScore ? console.log("Game was a tie. How boring.") : console.log("Game over.");
+        playerScore > computerScore ? console.log("********** You won the game! **********") : console.log("You lost the game :( Goodbye, loser.");
+      }
+      game();
     </script>
   </body>
 </html>
