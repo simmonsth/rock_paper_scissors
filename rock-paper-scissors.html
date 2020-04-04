@@ -14,6 +14,7 @@
 
       let playerScore   = 0;
       let computerScore = 0;
+      let storedComputerChoice;
 
       function computerPlay() {
         const rpsArray = ["rock", "paper", "scissors"];
@@ -23,6 +24,7 @@
       function playRound(playerChoice, computerChoice) {
         playerChoice = playerChoice.toLowerCase();
         computerChoice = computerChoice.toLowerCase();
+        storedComputerChoice = computerChoice;
         if (playerChoice == computerChoice) {
           return console.log(`Tie. Both chose ${playerChoice}.`);
         } else if (playerChoice === 'rock' && computerChoice === 'scissors') {
@@ -51,6 +53,7 @@
             beats your ${playerChoice}`);
         } else {
           console.log("You entered an invalid choice. Get it together.");
+          alert("STUPID");
         }
       }
 
@@ -60,9 +63,15 @@
         } else {console.log(`Starting new game of ${rounds} rounds...`);}
         while (rounds > 0) {
           let playerChoice = prompt('Rock, paper, or scissors? ', '');
-          playRound(playerChoice, 'rock');
-          playerChoice === 'rock' || playerChoice === 'paper' ||
-            playerChoice === 'scissors' ? rounds-- : alert("STUPID");
+          playRound(playerChoice, computerPlay());
+          if (playerChoice === storedComputerChoice) {
+            alert("TIE");
+            continue;
+          }
+          if (playerChoice === 'rock' || playerChoice === 'paper' ||
+            playerChoice === 'scissors') {
+              rounds--;
+            } else { continue; }
           console.log(`Score: Player (${playerScore}|${computerScore}) Computer`);
           console.log(`${rounds} rounds left.`);
         }
