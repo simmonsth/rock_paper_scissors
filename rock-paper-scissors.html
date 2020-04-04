@@ -6,9 +6,14 @@
   </head>
   <body>
     <script type="text/javascript">
+      html = document.querySelector('html');
+      para = document.createElement('p');
+      html.appendChild(para);
+      para.textContent = "Sassy RPS Computer 2.0 (don't screw up)";
+      document.body.style.backgroundColor = "honeydew";
+
       let playerScore   = 0;
       let computerScore = 0;
-      let rounds = 0;
 
       function computerPlay() {
         const rpsArray = ["rock", "paper", "scissors"];
@@ -22,22 +27,28 @@
           return console.log(`Tie. Both chose ${playerChoice}.`);
         } else if (playerChoice === 'rock' && computerChoice === 'scissors') {
           playerScore++;
-          return console.log(`You win this round. ${playerChoice} beats ${computerChoice}.`);
+          return console.log(`You win this round. ${playerChoice}
+            beats ${computerChoice}.`);
         } else if (playerChoice === 'rock' && computerChoice === 'paper') {
           computerScore++;
-          return console.log(`You lose this round. ${computerChoice} beats your ${playerChoice}`);
+          return console.log(`You lose this round. ${computerChoice}
+            beats your ${playerChoice}`);
         } else if (playerChoice === 'paper' && computerChoice === 'rock') {
           playerScore++;
-          return console.log(`You win this round. ${playerChoice} beats ${computerChoice}.`);
+          return console.log(`You win this round. ${playerChoice}
+            beats ${computerChoice}.`);
         } else if (playerChoice === 'paper' && computerChoice === 'scissors') {
           computerScore++;
-          return console.log(`You lose this round. ${computerChoice} beats your ${playerChoice}`);
+          return console.log(`You lose this round. ${computerChoice}
+            beats your ${playerChoice}`);
         } else if (playerChoice === 'scissors' && computerChoice === 'paper') {
           playerScore++;
-          return console.log(`You win this round. ${playerChoice} beats ${computerChoice}.`);
+          return console.log(`You win this round. ${playerChoice}
+            beats ${computerChoice}.`);
         } else if (playerChoice === 'scissors' && computerChoice === 'rock') {
           computerScore++;
-          return console.log(`You lose this round ${computerChoice} beats your ${playerChoice}`);
+          return console.log(`You lose this round ${computerChoice}
+            beats your ${playerChoice}`);
         } else {
           console.log("You entered an invalid choice. Get it together.");
         }
@@ -49,15 +60,20 @@
         } else {console.log(`Starting new game of ${rounds} rounds...`);}
         while (rounds > 0) {
           let playerChoice = prompt('Rock, paper, or scissors? ', '');
-          playRound(playerChoice, computerPlay());
-          rounds--;
+          playRound(playerChoice, 'rock');
+          playerChoice === 'rock' || playerChoice === 'paper' ||
+            playerChoice === 'scissors' ? rounds-- : alert("STUPID");
           console.log(`Score: Player (${playerScore}|${computerScore}) Computer`);
           console.log(`${rounds} rounds left.`);
         }
-        playerScore === computerScore ? console.log("Game was a tie. How boring.") : console.log("Game over.");
-        playerScore > computerScore ? console.log("********** You won the game! **********") : console.log("You lost the game :( Goodbye, loser.");
       }
       game();
+      playerScore === computerScore ? console.log("Game was a tie. How boring.")
+        : console.log("Game over.");
+      playerScore > computerScore ? console.log("********** You won the game! **********")
+        : console.log("You lost the game :( Goodbye, loser.");
+      if (playerScore === computerScore) { alert("BORING TIE. TRY WINNING NEXT TIME.") }
+      playerScore > computerScore ? alert("YOU WIN OMG") : alert("EW YOU LOST");
     </script>
   </body>
 </html>
