@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Good Ol' Rock, Paper, Scissorz</title>
+    <title>Good Ol' Rock, Paper, Scissorz with a little sass</title>
   </head>
   <body>
     <script type="text/javascript">
@@ -26,6 +26,7 @@
         computerChoice = computerChoice.toLowerCase();
         storedComputerChoice = computerChoice;
         if (playerChoice == computerChoice) {
+          alert("TIE");
           return console.log(`Tie. Both chose ${playerChoice}.`);
         } else if (playerChoice === 'rock' && computerChoice === 'scissors') {
           playerScore++;
@@ -65,7 +66,6 @@
           let playerChoice = prompt('Rock, paper, or scissors? ', '');
           playRound(playerChoice, computerPlay());
           if (playerChoice === storedComputerChoice) {
-            alert("TIE");
             continue;
           }
           if (playerChoice === 'rock' || playerChoice === 'paper' ||
