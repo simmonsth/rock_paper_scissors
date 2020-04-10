@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Good Ol' Rock, Paper, Scissorz with a little sass</title>
+  </head>
+  <body>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      #container {
+        border: 1px solid;
+        border-color: black;
+        width: 400px;
+        padding: 30px;
+      }
+      .game-status {
+        margin-top: 10px;
+        padding: 5px;
+        text-align: center;
+        border: 1px solid;
+        border-color: black;
+        background: #669999;
+        width: 400px;
+        font-weight: bold;
+      }
+      h2 {
+        color: red;
+        font-size: xx-large;
+        font-weight: bolder;
+      }
+    </style>
+    <h1>Rock, Paper, Scissors</h1>
+    <br>
+    <div id="container">
+      <div class="play-buttons">
+        <div>
+          <button id="rock" class="btn">Rock</button>
+          <button id="paper" class="btn">Paper</button>
+          <button id="scissors" class="btn">Scissors</button>
+        <div>
+      </div>
+      <div class="game-status">
+        <p id="cpu-pick"></p>
+        <p id="points">Player ( 0 | 0 ) Computer</p>
+        <p id="status">Make a choice to start game</p>    
+      </div>
+    </div>
+    <h2>ROUND: 1</h2>
+
+    <script type="text/javascript">
+      document.body.style.backgroundColor = "honeydew";
+
+      let playerScore   = 0;
+      let computerScore = 0;
+      let storedComputerChoice;
+      let rounds = 1;
+
+      const currentGameStatus = document.querySelector('#status');
+      const currentGamePoints = document.querySelector('#points');
+      const currentCPUPick    = document.querySelector('#cpu-pick');
+      const currentRound      = document.querySelector('h2');
+
+      function computerPlay() {
+        const rpsArray = ["rock", "paper", "scissors"];
+        return rpsArray[Math.floor(Math.random() * 3)];
+      }
+
+      function checkScore() {
+        if ((playerScore + computerScore) === 5) {
+          currentGamePoints.textContent = `Player ( ${playerScore} | ${computerScore} ) Computer`
+          if (playerScore > computerScore) {
+            currentRound.textContent = `GAME OVER - YOU WIN! ${playerScore}-${computerScore}`;
+          } else if (playerScore === computerScore) {
+            currentRound.textContent = `GAME OVER - TIE ${playerScore}-${computerScore}`;
+          } else {
+            currentRound.textContent = `GAME OVER - YOU LOSE ${playerScore}-${computerScore}`;
+          }
+          computerScore = 0;
+          playerScore = 0;
+          rounds = 1;
+          return true;
+        }
+      return false; 
+      }
+
+      function playRound(playerChoice, computerChoice) {
+        currentRound.textContent = `ROUND: ${rounds}`;
+        currentCPUPick.textContent = `Computer chose: ${computerChoice}`
+        if (playerChoice == computerChoice) {
+          currentGamePoints.textContent = `Player ( ${playerScore} | ${computerScore} ) Computer`
+          return currentGameStatus.textContent = `Tie. Both chose ${playerChoice}.`;
+        } else if (playerChoice === 'rock' && computerChoice === 'scissors') {
+          playerScore++;
+          currentGameStatus.textContent = `You win this round. ${playerChoice}
+            beats ${computerChoice}.`;
+          currentGamePoints.textContent = `Player ( ${playerScore} | ${computerScore} ) Computer`
+        } else if (playerChoice === 'rock' && computerChoice === 'paper') {
+          computerScore++;
+          currentGameStatus.textContent = `You lose this round. ${computerChoice}
+            beats your ${playerChoice}`;
+          currentGamePoints.textContent = `Player ( ${playerScore} | ${computerScore} ) Computer`
+        } else if (playerChoice === 'paper' && computerChoice === 'rock') {
+          playerScore++;
+          currentGameStatus.textContent = `You win this round. ${playerChoice}
+            beats ${computerChoice}.`;
+          currentGamePoints.textContent = `Player ( ${playerScore} | ${computerScore} ) Computer`
+        } else if (playerChoice === 'paper' && computerChoice === 'scissors') {
+          computerScore++;
+          currentGameStatus.textContent = `You lose this round. ${computerChoice}
+            beats your ${playerChoice}`;
+          currentGamePoints.textContent = `Player ( ${playerScore} | ${computerScore} ) Computer`
+        } else if (playerChoice === 'scissors' && computerChoice === 'paper') {
+          playerScore++;
+          currentGameStatus.textContent = `You win this round. ${playerChoice}
+            beats ${computerChoice}.`;
+          currentGamePoints.textContent = `Player ( ${playerScore} | ${computerScore} ) Computer`
+        } else if (playerChoice === 'scissors' && computerChoice === 'rock') {
+          computerScore++;
+          currentGameStatus.textContent = `You lose this round ${computerChoice}
+            beats your ${playerChoice}`;
+          currentGamePoints.textContent = `Player ( ${playerScore} | ${computerScore} ) Computer`
+        }
+        if (checkScore()) { return; }
+        rounds++;
+        return currentRound.textContent = `ROUND: ${rounds}`; 
+      }
+        
+      const buttons = Array.from(document.querySelectorAll('button'));
+      buttons.forEach(btn => btn.addEventListener('click', function() {
+        playRound(`${btn.id}`, computerPlay() )
+      }));
+    </script>
+  </body>
+</html>

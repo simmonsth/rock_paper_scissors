@@ -5,6 +5,13 @@
     <title>Good Ol' Rock, Paper, Scissorz with a little sass</title>
   </head>
   <body>
+
+    <div id="play-buttons">
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id= "scissors">Scissors</button>
+    </div>
+
     <script type="text/javascript">
       html = document.querySelector('html');
       para = document.createElement('p');
@@ -76,13 +83,14 @@
           console.log(`${rounds} rounds left.`);
         }
       }
-      game();
+      /*
       playerScore === computerScore ? console.log("Game was a tie. How boring.")
         : console.log("Game over.");
       playerScore > computerScore ? console.log("********** You won the game! **********")
         : console.log("You lost the game :( Goodbye, loser.");
       if (playerScore === computerScore) { alert("BORING TIE. TRY WINNING NEXT TIME.") }
       playerScore > computerScore ? alert("YOU WIN OMG") : alert("EW YOU LOST");
+      */
     </script>
   </body>
 </html>
